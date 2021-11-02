@@ -2,6 +2,7 @@
 from torch import nn
 from torch import optim
 import clip
+import tqdm
 import torch
 from clip_tuner.dataset import ImageCaptioningDataset
 from torch.utils.data import DataLoader
@@ -36,7 +37,10 @@ class CLIPTuner:
         train_dataloader = DataLoader(dataset, batch_size=4)  # Define your own dataloader
 
         for epoch in range(epochs):
+            pbar = tqdm.tqdm(position=0, total=len(train_dataloader))
+            pbar.set_description(f"{epoch}/{epochs}")
             for batch in train_dataloader:
+
                 self.optimizer.zero_grad()
 
                 list_image, list_txt = batch
@@ -58,3 +62,4 @@ class CLIPTuner:
                     convert_models_to_fp32(self.model)
                     self.optimizer.step()
                     clip.model.convert_weights(self.model)
+                pbar.update(1)
