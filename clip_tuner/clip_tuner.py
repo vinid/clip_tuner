@@ -34,7 +34,7 @@ class CLIPTuner:
 
     def tuner(self, dataframe, batch_size=4, epochs=5):
         dataset = ImageCaptioningDataset(dataframe, self.preprocess)
-        train_dataloader = DataLoader(dataset, batch_size=4)  # Define your own dataloader
+        train_dataloader = DataLoader(dataset, batch_size=batch_size)  # Define your own dataloader
 
         for epoch in range(epochs):
             pbar = tqdm.tqdm(position=0, total=len(train_dataloader))
