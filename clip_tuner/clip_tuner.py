@@ -104,7 +104,7 @@ class CLIPTuner:
 
                             logits_per_image, logits_per_text = self.model(images, texts)
 
-                            ground_truth = torch.arange(batch_size, dtype=torch.long, device=self.device)
+                            ground_truth = torch.arange(len(images), dtype=torch.long, device=self.device)
 
                             total_loss = (self.loss_img(logits_per_image, ground_truth) +
                                           self.loss_txt(logits_per_text, ground_truth)) / 2
