@@ -1,4 +1,5 @@
 """Main module."""
+from comet_ml import Experiment
 from torch import nn
 from torch import optim
 import clip
@@ -6,7 +7,6 @@ import tqdm
 import torch
 from clip_tuner.dataset import ImageCaptioningDataset
 from torch.utils.data import DataLoader
-from comet_ml import Experiment
 
 
 def convert_models_to_fp32(model):
@@ -22,10 +22,9 @@ class CLIPTuner:
         self.model, self.preprocess = clip.load("ViT-B/32", device=self.device,
                                                 jit=False)  # Must set jit=False for training
         if comet_tracking:
-
             self.experiment = Experiment(comet_tracking)
         else:
-            self.experiment = None
+            self.experiment = Experiment()
 
         if self.device == "cpu":
             self.model.float()
@@ -39,8 +38,7 @@ class CLIPTuner:
             "weight_decay": weight_decay
         }
 
-        experiment = Experiment()
-        experiment.log_parameters(hyper_params)
+        self.experiment.log_parameters(hyper_params)
 
         self.loss_img = nn.CrossEntropyLoss()
         self.loss_txt = nn.CrossEntropyLoss()
