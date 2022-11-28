@@ -15,4 +15,17 @@ class ImageCaptioningDataset(Dataset):
         caption = self.caption[idx]
         return images, caption
 
+class HFDataset(Dataset):
+    def __init__(self, df):
+        self.images = df["image"].tolist()
+        self.caption = df["caption"].tolist()
+
+    def __len__(self):
+        return len(self.caption)
+
+    def __getitem__(self, idx):
+        images = Image.open(self.images[idx])  # preprocess from clip.load
+        caption = self.caption[idx]
+        return images, caption
+
 
