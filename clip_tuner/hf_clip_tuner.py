@@ -94,7 +94,7 @@ def main():
         use_auth_token=True if model_args.use_auth_token else None,
     )
 
-    tokenizer = AutoTokenizer.from_pretrained(model_args.tokenizer_name)
+    tokenizer = AutoTokenizer.from_pretrained(model_args.model_name_or_path)
 
     feature_extractor = AutoFeatureExtractor.from_pretrained(model_args.feature_extractor_name)
 
