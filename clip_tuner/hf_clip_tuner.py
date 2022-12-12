@@ -3,6 +3,10 @@ Slightly edited version of the original script found here:
 https://github.com/huggingface/transformers/blob/main/examples/pytorch/contrastive-image-text/run_clip.py
 
 I have essentially removed a couple of things we didn't need
+
+
+image_path,caption
+
 """
 
 import logging
