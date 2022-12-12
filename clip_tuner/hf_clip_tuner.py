@@ -96,7 +96,7 @@ def main():
 
     tokenizer = AutoTokenizer.from_pretrained(model_args.model_name_or_path)
 
-    feature_extractor = AutoFeatureExtractor.from_pretrained(model_args.feature_extractor_name)
+    feature_extractor = AutoFeatureExtractor.from_pretrained(model_args.model_name_or_path)
 
     model = AutoModel.from_pretrained(model_args.model_name_or_path)
     config = model.config
